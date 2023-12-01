@@ -1,0 +1,130 @@
+<div mat-dialog-content>
+  <div id="container">
+    <form [formGroup]="formGroup" (ngSubmit)="register()">
+      <mat-stepper (selectionChange)="selectionChange($event)" #stepper>
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="" value="" formControlName="username">
+            <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="" formControlName="password" #passwordInput>
+            <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
+            <mat-label>Confirm password</mat-label>
+            <input matInput type="password" placeholder="" formControlName="confirmPassword" #confirmPasswordInput>
+            <mat-error>{{ ErrorUtils.getError("confirmPassword", formGroup.get("confirmPassword").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">label_outline</mat-icon>
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="" value="" formControlName="firstName">
+            <mat-error>{{ ErrorUtils.getError("firstName", formGroup.get("firstName").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">label_outline</mat-icon>
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="" value="" formControlName="lastName">
+            <mat-error>{{ ErrorUtils.getError("lastName", formGroup.get("lastName").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-label>Date of birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <mat-icon matDatepickerToggleIcon class="white-icon">calendar_today</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>{{ ErrorUtils.getError("dateOfBirth", formGroup.get("dateOfBirth").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matPrefix class="white-icon">mail_outline</mat-icon>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="" value="" formControlName="email">
+            <mat-error>{{ ErrorUtils.getError("email", formGroup.get("email").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-icon matSuffix class="white-icon">phone</mat-icon>
+            <mat-label>Phone number</mat-label>
+            <ngx-mat-intl-tel-input
+              [preferredCountries]="['md', 'ro']"
+              [enablePlaceholder]="true"
+              [enableSearch]="true"
+              name="phone"
+              describedBy="phoneInput"
+              formControlName="phoneNumber"
+              class="phone-code-white"
+            ></ngx-mat-intl-tel-input>
+            <mat-error>{{ ErrorUtils.getError("phoneNumber", formGroup.get("phoneNumber").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
+            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
+  </div>
+</div>

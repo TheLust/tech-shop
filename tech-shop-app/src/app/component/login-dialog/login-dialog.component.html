@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+  <div id="container">
+    <form [formGroup]="formGroup" (ngSubmit)="login()">
+      <img [src]="randomImageSrc" alt=""><br>
+      <mat-form-field appearance="outline" style="margin-top: 20px">
+        <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="" value="" formControlName="username">
+        <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="" formControlName="password">
+        <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
+      </mat-form-field>
+      <button mat-button type="submit">Sign In</button><br>
+      <span><a href="#">Forgot Password?</a></span>
+    </form>
+  </div>
+</div>

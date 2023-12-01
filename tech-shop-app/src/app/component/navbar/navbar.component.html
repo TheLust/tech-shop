@@ -1,0 +1,22 @@
+<header class="main-header">
+  <div class="logo">
+    <a [routerLink]="" (click)="navigate('')">TECHSHOP</a>
+  </div>
+
+  <input type="checkbox" class="menu-btn" id="menu-btn" [(ngModel)]="menu">
+  <label for="menu-btn" class="menu-icon">
+    <span class="menu-icon__line"></span>
+  </label>
+
+  <ul class="nav-links">
+    <li class="nav-link" *ngFor="let route of getRoutes()">
+      <a [routerLink]="" (click)='navigate(navRoutes.get(route))'>{{ route }}</a>
+    </li>
+    <li class="nav-link">
+      <a [routerLink]="" (click)="openLoginDialog()">Login</a>
+    </li>
+    <li class="nav-link">
+      <a [routerLink]="" (click)="openRegisterDialog()">Register</a>
+    </li>
+  </ul>
+</header>
