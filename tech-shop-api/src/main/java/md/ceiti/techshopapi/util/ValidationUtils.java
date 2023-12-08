@@ -17,4 +17,15 @@ public class ValidationUtils {
             errors.rejectValue(violation.getPropertyPath().toString(), "", violation.getMessage());
         }
     }
+
+    public static <T> void validateExceptPassword(T object, Errors errors) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+
+        for (ConstraintViolation<T> violation : validator.validate(object)) {
+            if (!violation.getPropertyPath().toString().equals("password")) {
+                errors.rejectValue(violation.getPropertyPath().toString(), "", violation.getMessage());
+            }
+        }
+    }
 }

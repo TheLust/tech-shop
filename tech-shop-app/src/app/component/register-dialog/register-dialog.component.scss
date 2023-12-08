@@ -56,6 +56,10 @@ mat-form-field {
   height: auto;
 }
 
+mat-select {
+  color: white;
+}
+
 ::ng-deep .phone-code-white .country-selector-code {
   color: white;
 }
@@ -81,7 +85,7 @@ button {
   justify-content: space-evenly;
 }
 
-button[type="submit"]:hover{
+button:hover{
   border: 1px solid var(--mat-badge-background-color);
 }
 

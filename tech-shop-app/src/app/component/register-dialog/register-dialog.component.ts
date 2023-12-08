@@ -1,23 +1,25 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ErrorUtils} from "../../util/error-utils";
-import {AuthService} from "../../service/auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from "../../service/auth/auth.service";
 import {CustomValidators} from "../../util/custom-validators";
 import {StepperSelectionEvent} from "@angular/cdk/stepper";
-import {MatStep, MatStepper} from "@angular/material/stepper";
-import {MatFormField} from "@angular/material/form-field";
+import {MatStepper} from "@angular/material/stepper";
+import {Router} from "@angular/router";
+import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-register-dialog',
   templateUrl: './register-dialog.component.html',
   styleUrls: ['./register-dialog.component.scss']
 })
-export class RegisterDialogComponent implements OnInit{
+export class RegisterDialogComponent implements OnInit, OnDestroy {
+
+  @ViewChild('stepper') stepper: MatStepper;
 
   protected readonly ErrorUtils = ErrorUtils;
   formGroup: FormGroup;
-  genders: string[] = ["Male", "Female", "Other"];
   randomImages: string[] = [
     'login-profile-icon.jpg',
     'login-profile-icon2.jpg',
@@ -26,8 +28,12 @@ export class RegisterDialogComponent implements OnInit{
     'login-profile-icon5.jpg'
   ];
   randomImageSrc: string = '';
+  destroyNextPage: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router, private renderer: Renderer2) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<RegisterDialogComponent>) {
     authService.removeToken();
   }
 
@@ -101,29 +107,76 @@ export class RegisterDialogComponent implements OnInit{
     this.getRandomImage();
   }
 
+  ngOnDestroy(): void {
+    if (this.destroyNextPage) {
+      sessionStorage.removeItem('next_page');
+    }
+  }
+
   getRandomImage(): void {
     const randomIndex = Math.floor(Math.random() * this.randomImages.length);
     this.randomImageSrc = `assets/images/login-dialog-profile-icons/${this.randomImages[randomIndex]}`;
   }
 
-  @ViewChild('stepper') stepper: MatStepper;
-
-  selectionChange(event: StepperSelectionEvent) {
+  selectionChange(event: StepperSelectionEvent): void {
     if (event.selectedIndex !== undefined) {
       this.focusField(event.selectedIndex);
     }
   }
 
   private focusField(index: number): void {
-    const step:MatStep = this.stepper.steps.get(index);
-    console.log(step)
+    const field: HTMLElement = this.getStepElementByIndex(index).querySelector('mat-form-field');
+    const input: HTMLInputElement = field.querySelector('input');
+    setTimeout(() => {
+      if (input) {
+        input.focus();
+      }
+    }, 300);
+  }
+
+  private getStepElementByIndex(index: number): Element {
+      const steps = document.getElementsByClassName('mat-horizontal-content-container');
+      return steps.item(0).children[index];
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.key === 'Tab') {
+        if (this.stepper.selectedIndex <= this.stepper.steps.length - 2) {
+            const buttonElement: HTMLButtonElement = this.getStepElementByIndex(this.stepper.selectedIndex).querySelector('button[matStepperNext]');
+            buttonElement.click();
+        }
+    }
+
+    if (event.key === "Enter" && this.stepper.selectedIndex == this.stepper.steps.length - 1) {
+        if (this.formGroup.valid) {
+            this.register();
+        }
+    }
+  }
+
+  openLoginDialog(): void {
+      this.dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
+      this.destroyNextPage = false;
+      this.dialogRef.close();
   }
 
   register(): void {
     if (this.formGroup.valid) {
       this.authService.register(this.formGroup)
         .subscribe({
-          next: value => alert(value),
+          next: value => {
+            this.authService.setToken(value);
+              const toGo: string = sessionStorage.getItem('next_page');
+              if (toGo != null) {
+                  this.router.navigate([toGo]).then(() => {
+                      sessionStorage.removeItem('next_page') ;
+                      window.location.reload();
+                  });
+              } else {
+                  window.location.reload();
+              }
+          },
           error: err => ErrorUtils.setErrors(
             this.formGroup,
             new Map<string, Map<string, string>>(Object.entries(JSON.parse(err.error)))

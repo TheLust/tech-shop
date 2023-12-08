@@ -12,11 +12,10 @@ import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {RegisterComponent} from './component/register/register.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {NgxMatIntlTelInputComponent} from "ngx-mat-intl-tel-input";
 import {HomeComponent} from './component/home/home.component';
 import {AdminComponent} from './component/admin/admin.component';
@@ -25,45 +24,53 @@ import {ForbiddenComponent} from './component/forbidden/forbidden.component';
 import {NotFoundComponent} from './component/not-found/not-found.component';
 import {NavbarComponent} from './component/navbar/navbar.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { LoginDialogComponent } from './component/login-dialog/login-dialog.component';
-import { RegisterDialogComponent } from './component/register-dialog/register-dialog.component';
+import {LoginDialogComponent} from './component/login-dialog/login-dialog.component';
+import {RegisterDialogComponent} from './component/register-dialog/register-dialog.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatMenuModule} from "@angular/material/menu";
+import {ProfileComponent} from './component/profile/profile.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
     HomeComponent,
     AdminComponent,
     ForbiddenComponent,
     NotFoundComponent,
     NavbarComponent,
     LoginDialogComponent,
-    RegisterDialogComponent
+    RegisterDialogComponent,
+    ProfileComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMatIntlTelInputComponent,
-    MatDialogModule,
-    MatStepperModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        NgxMatIntlTelInputComponent,
+        MatDialogModule,
+        MatStepperModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatDividerModule
+    ],
   providers: [
-      CookieService
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

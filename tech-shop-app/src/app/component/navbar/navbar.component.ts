@@ -1,27 +1,38 @@
-import {Component} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
+import {AuthService} from "../../service/auth/auth.service";
+import {jwtDecode} from "jwt-decode";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  menu: boolean = false;
+  mobile: boolean;
+  username: string;
 
   navRoutes: Map<string, string> = new Map<string, string>([
     ['Home', ''],
     ['About', 'about'],
     ['Contact Us', 'contact']
-    // ['Login', 'login'],
-    // ['Register', 'register']
   ]);
 
-  constructor(public dialog: MatDialog, private router: Router) {
+  constructor(public dialog: MatDialog, public router: Router, public authService: AuthService) {
+    this.username = authService.getUsernameFromToken(authService.getToken());
+  }
+
+  ngOnInit(): void {
+    this.mobile = window.innerWidth < 767;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.mobile = window.innerWidth < 767;
   }
 
   getRoutes(): string[] {
@@ -29,17 +40,21 @@ export class NavbarComponent {
   }
 
   navigate(url: string): void {
-    this.menu = false;
     this.router.navigate([url]);
   }
 
-  openLoginDialog(): void {
-    this.menu = false;
+  openLoginDialog(): void {;
     this.dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
   }
 
   openRegisterDialog(): void {
-    this.menu = false;
     this.dialog.open(RegisterDialogComponent, { panelClass: 'dialog-transparent-background' });
   }
+
+  signOut(): void {
+    this.authService.removeToken();
+    this.router.navigate(['']);
+  }
+
+  protected readonly window = window;
 }

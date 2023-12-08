@@ -4,17 +4,17 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-app-forbidden, app-not-found, app-home {
+app-forbidden, app-not-found, app-home, app-profile {
   font-family: 'Exo 2', sans-serif;
   display:flex;
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 65px 0 0;
   position: relative;
   min-height: 100vh;
   background-color: #171c24;
@@ -47,6 +47,84 @@ app-forbidden, app-not-found, app-home {
   }
 }
 
+// white form field
+
+.white-field .mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled),
+.white-field .mdc-text-field--disabled {
+  .mdc-notched-outline > * {
+    border-color: white !important;
+  }
+
+  label {
+    color: white !important;
+  }
+}
+
+.white-field mat-hint,
+.white-field mat-select,
+.white-field mat-select svg,
+.white-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,
+.white-field .mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input,
+.white-field ngx-mat-intl-tel-input .country-selector-code {
+  color: white;
+}
+
+// dark background
+
+mat-datepicker-content:has(mat-calendar.dark-background) {
+  background-color: #171c24;
+  color: white !important;
+}
+
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-body-cell-content,
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-body-label,
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-table-header th,
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-mdc-button:not(:disabled),
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-previous-button,
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-next-button{
+  color: white;
+}
+
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-arrow {
+  fill: white;
+}
+
+mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-table-header-divider::after {
+  background: white;
+}
+
+div[role="listbox"].dark-background.mat-mdc-select-panel {
+  background-color: #171c24;
+}
+
+div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
+  color: white;
+}
+
+// ngx-mat-intl-tel-input
+
+.ngx-mat-tel-input-mat-menu-panel,
+.ngx-mat-tel-input-mat-menu-panel input{
+  background-color: #171c24 !important;
+}
+
+.ngx-mat-tel-input-mat-menu-panel button,
+.ngx-mat-tel-input-mat-menu-panel input{
+  color: white !important;
+}
+
+.ngx-mat-tel-input-mat-menu-panel::-webkit-scrollbar {
+  background: transparent;
+}
+
+.ngx-mat-tel-input-mat-menu-panel::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+}
+
+// icons
 
 .white-icon {
   color: white;
@@ -55,3 +133,67 @@ app-forbidden, app-not-found, app-home {
 .white-icon svg {
   fill: white;
 }
+
+// menu
+
+.menu-transparent-background {
+  background-color: transparent !important;
+  backdrop-filter: blur(10px);
+}
+
+.menu-transparent-background .mat-mdc-menu-item, .mat-mdc-menu-item:visited, .mat-mdc-menu-item:link {
+  color: white;
+  //filter: opacity(0.8);
+}
+
+.menu-transparent-background .mat-mdc-menu-item .mat-icon-no-color, .mat-mdc-menu-item .mat-mdc-menu-submenu-icon {
+  color: white !important;
+}
+
+.dialog-transparent-background mat-dialog-container app-register-dialog form mat-stepper .mat-horizontal-content-container {
+  padding-bottom: 0;
+}
+
+.mat-select-dark-background {
+  background-color: #171c24 !important;
+}
+
+.mat-select-dark-background mat-option {
+  color: white;
+}
+
+.form-container {
+  max-width: 575px;
+  width: 90%;
+  height: auto;
+  margin: auto auto auto auto;
+  background: rgba(5, 13, 25, 0.569);
+  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.white-divider {
+  border-top-color: white !important;
+}
+
+// white button
+
+.white-button {
+  min-width: 100px !important;
+  width: 100px;
+  background: transparent !important;
+  border: 1px solid white !important;
+  color: white !important;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.white-button .mat-mdc-button:not(:disabled) {
+  color: white;
+}
+
+.white-button:hover{
+  border: 1px solid var(--mat-badge-background-color) !important;
+}
+

@@ -7,11 +7,18 @@
           <mat-form-field appearance="outline">
             <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
             <mat-label>Username</mat-label>
-            <input matInput placeholder="" value="" formControlName="username">
+            <input matInput
+                   placeholder=""
+                   value=""
+                   formControlName="username">
             <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('username').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -20,12 +27,19 @@
           <mat-form-field appearance="outline">
             <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
             <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="" formControlName="password" #passwordInput>
+            <input matInput type="password" placeholder="" formControlName="password">
             <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('password').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -34,12 +48,19 @@
           <mat-form-field appearance="outline">
             <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
             <mat-label>Confirm password</mat-label>
-            <input matInput type="password" placeholder="" formControlName="confirmPassword" #confirmPasswordInput>
+            <input matInput type="password" placeholder="" formControlName="confirmPassword">
             <mat-error>{{ ErrorUtils.getError("confirmPassword", formGroup.get("confirmPassword").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('confirmPassword').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -52,8 +73,15 @@
             <mat-error>{{ ErrorUtils.getError("firstName", formGroup.get("firstName").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('firstName').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -66,8 +94,39 @@
             <mat-error>{{ ErrorUtils.getError("lastName", formGroup.get("lastName").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('lastName').valid"
+                    (click)="getRandomImage()">Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <img [src]="randomImageSrc" alt=""><br>
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select panelClass="mat-select-dark-background">
+              <mat-option value="MALE">Male</mat-option>
+              <mat-option value="FEMALE">Female</mat-option>
+              <mat-option value="OTHER">Other</mat-option>
+            </mat-select>
+            <mat-error>{{ ErrorUtils.getError("gender", formGroup.get("gender").errors) }}</mat-error>
+          </mat-form-field>
+          <div class="button-container">
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('gender').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -84,8 +143,15 @@
             <mat-error>{{ ErrorUtils.getError("dateOfBirth", formGroup.get("dateOfBirth").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('dateOfBirth').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -98,8 +164,15 @@
             <mat-error>{{ ErrorUtils.getError("email", formGroup.get("email").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    matStepperNext
+                    type="button"
+                    [disabled]="!formGroup.get('email').valid"
+                    (click)="getRandomImage()">Next</button>
           </div>
         </mat-step>
 
@@ -120,11 +193,17 @@
             <mat-error>{{ ErrorUtils.getError("phoneNumber", formGroup.get("phoneNumber").errors) }}</mat-error>
           </mat-form-field>
           <div class="button-container">
-            <button mat-button matStepperPrevious (click)="getRandomImage()">Back</button>
-            <button mat-button matStepperNext (click)="getRandomImage()">Next</button>
+            <button mat-button
+                    matStepperPrevious
+                    type="button"
+                    (click)="getRandomImage()">Back</button>
+            <button mat-button
+                    type="submit"
+                    (click)="register()">Sign up</button>
           </div>
         </mat-step>
       </mat-stepper>
+      <span><a [routerLink]="" (click)="openLoginDialog()">Already have an account?</a></span>
     </form>
   </div>
 </div>

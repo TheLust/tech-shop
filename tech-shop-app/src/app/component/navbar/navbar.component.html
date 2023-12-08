@@ -3,20 +3,43 @@
     <a [routerLink]="" (click)="navigate('')">TECHSHOP</a>
   </div>
 
-  <input type="checkbox" class="menu-btn" id="menu-btn" [(ngModel)]="menu">
-  <label for="menu-btn" class="menu-icon">
-    <span class="menu-icon__line"></span>
-  </label>
+<!--  <input type="checkbox" class="menu-btn" id="menu-btn" [(ngModel)]="menu">-->
+<!--  <label for="menu-btn" class="menu-icon">-->
+<!--    <span class="menu-icon__line"></span>-->
+<!--  </label>-->
 
-  <ul class="nav-links">
+  <ul *ngIf="!mobile" class="nav-links">
     <li class="nav-link" *ngFor="let route of getRoutes()">
       <a [routerLink]="" (click)='navigate(navRoutes.get(route))'>{{ route }}</a>
     </li>
-    <li class="nav-link">
-      <a [routerLink]="" (click)="openLoginDialog()">Login</a>
+    <li *ngIf="!authService.getToken()" class="nav-link">
+      <a [routerLink]="" (click)="openLoginDialog()">Sign in</a>
     </li>
-    <li class="nav-link">
-      <a [routerLink]="" (click)="openRegisterDialog()">Register</a>
+    <li *ngIf="!authService.getToken()" class="nav-link">
+      <a [routerLink]="" (click)="openRegisterDialog()">Sign up</a>
+    </li>
+    <li *ngIf="authService.getToken()" class="nav-link">
+      <a [matMenuTriggerFor]="accountMenu">Hi, {{ username }}</a>
     </li>
   </ul>
+
+  <button mat-icon-button *ngIf="mobile" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu" xPosition="before" class="menu-transparent-background">
+    <button mat-menu-item *ngFor="let route of getRoutes()" (click)='navigate(navRoutes.get(route))'>{{ route }}</button>
+    <button mat-menu-item *ngIf="authService.getToken()" [matMenuTriggerFor]="accountMenu">Hi, {{ username }}</button>
+    <button mat-menu-item *ngIf="!authService.getToken()" (click)="openLoginDialog()">Sign in</button>
+    <button mat-menu-item *ngIf="!authService.getToken()" (click)="openRegisterDialog()">Sign up</button>
+  </mat-menu>
+
+  <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="above" class="menu-transparent-background">
+    <button mat-menu-item (click)="router.navigate(['profile'])">Profile</button>
+    <button mat-menu-item>Orders</button>
+    <button mat-menu-item>Wishes</button>
+<!--    <button mat-menu-item>Recommendations</button>-->
+    <button mat-menu-item (click)="signOut()">Sign out</button>
+  </mat-menu>
+
 </header>

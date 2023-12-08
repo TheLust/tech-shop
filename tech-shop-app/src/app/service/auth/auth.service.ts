@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {baseUrl} from "../../environments/environment";
+import {baseUrl} from "../../../environments/environment";
 import {FormGroup} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 import {jwtDecode} from "jwt-decode";
@@ -53,6 +53,19 @@ export class AuthService {
         ['user', 2],
         ['guest', 3]
     ]);
+  }
+
+  getUsernameFromToken(token: string): string | null {
+    if (token) {
+      const decodedToken: { [key: string]: any } = jwtDecode(token);
+      return decodedToken['username'];
+    }
+
+    return null;
+  }
+
+  getBearer(): string {
+    return 'Bearer ' + this.getToken();
   }
 
   login(formGroup: FormGroup): Observable<any> {

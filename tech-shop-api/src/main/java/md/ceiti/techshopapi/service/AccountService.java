@@ -44,7 +44,16 @@ public class AccountService {
 
     @Transactional
     public Account update(Account oldAccount, Account newAccount) {
-        BeanUtils.copyProperties(newAccount, oldAccount, "id");
+        if (newAccount.getPassword() != null) {
+            oldAccount = updatePassword(oldAccount, newAccount.getPassword());
+        }
+        BeanUtils.copyProperties(newAccount, oldAccount, "id", "password");
+        return accountRepository.save(oldAccount);
+    }
+
+    private Account updatePassword(Account oldAccount, String newPassword) {
+        newPassword = passwordEncoder.encode(newPassword);
+        oldAccount.setPassword(newPassword);
         return accountRepository.save(oldAccount);
     }
 

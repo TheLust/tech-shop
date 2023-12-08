@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ErrorUtils} from "../../util/error-utils";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from "../../service/auth/auth.service";
 import {Router} from "@angular/router";
-import {MatDialogRef} from "@angular/material/dialog";
+import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login-dialog',
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.scss']
 })
-export class LoginDialogComponent implements OnInit {
+export class LoginDialogComponent implements OnInit, OnDestroy {
 
   protected readonly ErrorUtils = ErrorUtils;
   formGroup: FormGroup;
@@ -22,9 +23,12 @@ export class LoginDialogComponent implements OnInit {
     'login-profile-icon4.jpg'
   ];
   randomImageSrc: string = '';
+  destroyNextPage: boolean = true;
 
   constructor(private authService: AuthService,
-              public router: Router) {}
+              private router: Router,
+              private dialog: MatDialog,
+              private dialogRef: MatDialogRef<LoginDialogComponent>) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
@@ -34,9 +38,21 @@ export class LoginDialogComponent implements OnInit {
     this.getRandomImage();
   }
 
-  getRandomImage() {
+  ngOnDestroy(): void {
+    if (this.destroyNextPage) {
+      sessionStorage.removeItem('next_page');
+    }
+  }
+
+  getRandomImage(): void {
     const randomIndex = Math.floor(Math.random() * this.randomImages.length);
     this.randomImageSrc = `assets/images/login-dialog-profile-icons/${this.randomImages[randomIndex]}`;
+  }
+
+  openRegisterDialog(): void {
+    this.dialog.open(RegisterDialogComponent, { panelClass: 'dialog-transparent-background' });
+    this.destroyNextPage = false;
+    this.dialogRef.close();
   }
 
   login(): void {
@@ -45,7 +61,15 @@ export class LoginDialogComponent implements OnInit {
         .subscribe({
           next: value => {
             this.authService.setToken(value);
-            this.router.navigate([""]);
+            const toGo: string = sessionStorage.getItem('next_page');
+            if (toGo != null) {
+              this.router.navigate([toGo]).then(() => {
+                sessionStorage.removeItem('next_page') ;
+                window.location.reload();
+              });
+            } else {
+              window.location.reload();
+            }
           },
           error: err => ErrorUtils.setErrors(
             this.formGroup,

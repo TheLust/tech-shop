@@ -1,74 +1,69 @@
-<div fxLayoutAlign="center center" fxFlexFill class="main-div">
-  <mat-card fxFlex="500px">
-    <mat-toolbar color="primary">Register</mat-toolbar>
-    <form fxFlexAlign="stretch" fxLayout="column" class="register-form" [formGroup]="formGroup" (ngSubmit)="register()">
-      <mat-form-field>
+<div class="form-container">
+  <form *ngIf="formGroup && account" [formGroup]="formGroup">
+    <h1>Profile</h1>
+
+    <div class="fields-container">
+      <mat-form-field appearance="outline" class="white-field">
         <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
         <mat-label>Username</mat-label>
-        <input matInput placeholder="" value="" formControlName="username">
+        <input matInput
+               placeholder=""
+               value=''
+               formControlName="username">
         <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="white-field">
         <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
         <mat-label>Password</mat-label>
         <input matInput type="password" placeholder="" formControlName="password">
         <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
-        <mat-label>Confirm password</mat-label>
-        <input matInput type="password" placeholder="" formControlName="confirmPassword">
-        <mat-error>{{ ErrorUtils.getError("confirmPassword", formGroup.get("confirmPassword").errors) }}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="white-field">
         <mat-icon matPrefix class="white-icon">label_outline</mat-icon>
         <mat-label>First name</mat-label>
         <input matInput placeholder="" value="" formControlName="firstName">
         <mat-error>{{ ErrorUtils.getError("firstName", formGroup.get("firstName").errors) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-icon matPrefix>label_outline</mat-icon>
+      <mat-form-field appearance="outline" class="white-field">
+        <mat-icon matPrefix class="white-icon">label_outline</mat-icon>
         <mat-label>Last name</mat-label>
         <input matInput placeholder="" value="" formControlName="lastName">
         <mat-error>{{ ErrorUtils.getError("lastName", formGroup.get("lastName").errors) }}</mat-error>
       </mat-form-field>
 
-      <div class="field">
-        <div class="gender-field">
-          <mat-label>Gender</mat-label>
-          <mat-radio-group formControlName="gender">
-            <mat-radio-button *ngFor="let gender of genders"
-                              [class.selected-radio-button]="formGroup.get('gender').value == gender.toUpperCase()"
-                              value="{{ gender.toUpperCase() }}" >{{ gender }}</mat-radio-button>
-          </mat-radio-group>
-        </div>
+      <mat-form-field appearance="outline" class="white-field">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender" panelClass="dark-background">
+          <mat-option value="MALE">Male</mat-option>
+          <mat-option value="FEMALE">Female</mat-option>
+          <mat-option value="OTHER">Other</mat-option>
+        </mat-select>
         <mat-error>{{ ErrorUtils.getError("gender", formGroup.get("gender").errors) }}</mat-error>
-      </div>
+      </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="outline" class="white-field">
         <mat-label>Date of birth</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
         <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon class="white-icon">calendar_today</mat-icon>
         </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #picker panelClass="dark-background"></mat-datepicker>
         <mat-error>{{ ErrorUtils.getError("dateOfBirth", formGroup.get("dateOfBirth").errors) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-icon matPrefix>email</mat-icon>
+      <mat-form-field appearance="outline" class="white-field">
+        <mat-icon matPrefix class="white-icon">mail_outline</mat-icon>
         <mat-label>Email</mat-label>
         <input matInput placeholder="" value="" formControlName="email">
         <mat-error>{{ ErrorUtils.getError("email", formGroup.get("email").errors) }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-icon matPrefix>phone</mat-icon>
+      <mat-form-field appearance="outline" class="white-field">
+        <mat-icon matSuffix class="white-icon">phone</mat-icon>
         <mat-label>Phone number</mat-label>
         <ngx-mat-intl-tel-input
           [preferredCountries]="['md', 'ro']"
@@ -81,8 +76,13 @@
         <mat-error>{{ ErrorUtils.getError("phoneNumber", formGroup.get("phoneNumber").errors) }}</mat-error>
       </mat-form-field>
 
-      <button mat-button type="submit">Register</button>
-      <button mat-button (click)="router.navigate(['login'])">Login</button>
-    </form>
-  </mat-card>
+      <div *ngIf="formGroup?.disabled" class="edit-button-container-end">
+        <button mat-button (click)="edit(true)" class="white-button">Edit</button>
+      </div>
+      <div *ngIf="formGroup?.enabled" class="edit-button-container-space">
+        <button mat-button (click)="edit(false)" class="white-button">Cancel</button>
+        <button mat-button class="white-button" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
 </div>

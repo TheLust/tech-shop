@@ -2,13 +2,15 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./component/home/home.component";
 import {AdminComponent} from "./component/admin/admin.component";
-import {authGuard} from "./guard/auth.guard";
+import {AuthGuard} from "./guard/auth.guard";
 import {ForbiddenComponent} from "./component/forbidden/forbidden.component";
 import {NotFoundComponent} from "./component/not-found/not-found.component";
+import {ProfileComponent} from "./component/profile/profile.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
-  {path:'admin', component:AdminComponent, canActivate: [authGuard], data: {requiredRole: "admin"}},
+  {path:'admin', component:AdminComponent, canActivate: [AuthGuard], data: {requiredRole: "admin"}},
+  {path:'profile', component:ProfileComponent, canActivate: [AuthGuard], data: {requiredRole: "user"}},
   {path:'403', component:ForbiddenComponent},
   {path:'404', component:NotFoundComponent},
   {path:'**', component:NotFoundComponent}

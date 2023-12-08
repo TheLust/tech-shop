@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1{
+  font-weight:900;
+  color: white;
+  letter-spacing: 3px;
+  font-size: 2em;
+  text-align: center;
+  line-height: normal;
+  font-family: "Raleway", sans-serif;
+}
+
+.fields-container {
+  width: auto;
+  display: flex;
+  @media screen and ( min-width: 767px )  {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  @media screen and ( max-width: 768px )  {
+    flex-direction: column;
+  }
+}
+
+mat-form-field {
+  align-self: center;
+  margin-top: 10px;
+  width: 100%;
+  @media screen and ( min-width: 767px )  {
+    width: 45%;
+  }
+}
+
+.edit-button-container-end {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button-container-space {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
