@@ -31,6 +31,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './component/profile/profile.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
+import { ConfirmPasswordDialogComponent } from './component/confirm-password-dialog/confirm-password-dialog.component';
+import { AboutComponent } from './component/about/about.component';
+import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -42,33 +45,35 @@ import {MatDividerModule} from "@angular/material/divider";
     NavbarComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    ConfirmPasswordDialogComponent,
+    AboutComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatCardModule,
-        MatToolbarModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatRadioModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        NgxMatIntlTelInputComponent,
-        MatDialogModule,
-        MatStepperModule,
-        MatMenuModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatDividerModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMatIntlTelInputComponent,
+    MatDialogModule,
+    MatStepperModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDividerModule
+  ],
   providers: [
     CookieService
   ],

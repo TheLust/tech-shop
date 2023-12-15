@@ -9,6 +9,9 @@ public class ConstraintViolationMessage {
     public static final String NOT_FOUND = "not found";
     public static final String EMAIL = "must be valid";
     public static final String SIZE = "must have between {min} and {max} characters";
+    public static final String SIZE_ENUMERABLE = "must have between {min} and {max} elements";
+    public static final String MIN = "must be at least {value}";
+    public static final String MAX = "must be up to {value}";
     public static final String PAST = "must be in the past";
     public static final String OVER18 = "must be 18+";
     public static final String INTERNATIONAL_FORMAT = "must be in the international format";

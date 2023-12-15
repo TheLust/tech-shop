@@ -3,8 +3,8 @@ package md.ceiti.techshopapi.facade;
 import lombok.RequiredArgsConstructor;
 import md.ceiti.techshopapi.dto.request.LoginRequest;
 import md.ceiti.techshopapi.dto.request.RegisterRequest;
-import md.ceiti.techshopapi.entity.Account;
-import md.ceiti.techshopapi.entity.AccountDetails;
+import md.ceiti.techshopapi.entity.account.Account;
+import md.ceiti.techshopapi.entity.account.AccountDetails;
 import md.ceiti.techshopapi.exception.ValidationException;
 import md.ceiti.techshopapi.mapper.AccountMapper;
 import md.ceiti.techshopapi.security.JwtUtils;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 @Component

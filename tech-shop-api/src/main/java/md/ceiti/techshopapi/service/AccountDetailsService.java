@@ -1,8 +1,8 @@
 package md.ceiti.techshopapi.service;
 
 import lombok.RequiredArgsConstructor;
-import md.ceiti.techshopapi.entity.Account;
-import md.ceiti.techshopapi.entity.AccountDetails;
+import md.ceiti.techshopapi.entity.account.Account;
+import md.ceiti.techshopapi.entity.account.AccountDetails;
 import md.ceiti.techshopapi.repository.AccountRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

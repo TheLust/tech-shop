@@ -1,6 +1,6 @@
 <div class="form-container">
-  <form *ngIf="formGroup && account" [formGroup]="formGroup">
-    <h1>Profile</h1>
+  <form *ngIf="formGroup && account" [formGroup]="formGroup" (ngSubmit)="update(null, null)">
+    <h1 class="title">Profile</h1>
 
     <div class="fields-container">
       <mat-form-field appearance="outline" class="white-field">
@@ -76,12 +76,13 @@
         <mat-error>{{ ErrorUtils.getError("phoneNumber", formGroup.get("phoneNumber").errors) }}</mat-error>
       </mat-form-field>
 
-      <div *ngIf="formGroup?.disabled" class="edit-button-container-end">
+      <div *ngIf="formGroup?.disabled" class="edit-button-container">
+        <button mat-button (click)="done()" class="white-button">Done</button>
         <button mat-button (click)="edit(true)" class="white-button">Edit</button>
       </div>
-      <div *ngIf="formGroup?.enabled" class="edit-button-container-space">
+      <div *ngIf="formGroup?.enabled" class="edit-button-container">
         <button mat-button (click)="edit(false)" class="white-button">Cancel</button>
-        <button mat-button class="white-button" type="submit">Save</button>
+        <button mat-button class="white-button" type="submit" [disabled]="!isFormChanged()">Save</button>
       </div>
     </div>
   </form>

@@ -2,7 +2,7 @@ package md.ceiti.techshopapi.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
-import md.ceiti.techshopapi.entity.Gender;
+import md.ceiti.techshopapi.entity.account.Gender;
 
 import java.time.LocalDate;
 

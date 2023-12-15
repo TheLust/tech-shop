@@ -1,4 +1,4 @@
-package md.ceiti.techshopapi.entity;
+package md.ceiti.techshopapi.entity.account;
 
 public enum Gender {
     MALE,

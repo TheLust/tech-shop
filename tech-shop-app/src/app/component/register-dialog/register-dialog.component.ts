@@ -8,6 +8,7 @@ import {MatStepper} from "@angular/material/stepper";
 import {Router} from "@angular/router";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {formatDate} from "../../util/date-utils";
 
 @Component({
   selector: 'app-register-dialog',
@@ -163,6 +164,8 @@ export class RegisterDialogComponent implements OnInit, OnDestroy {
 
   register(): void {
     if (this.formGroup.valid) {
+      let value = this.formGroup.value;
+      value.dateOfBirth = formatDate(new Date(value.dateOfBirth));
       this.authService.register(this.formGroup)
         .subscribe({
           next: value => {

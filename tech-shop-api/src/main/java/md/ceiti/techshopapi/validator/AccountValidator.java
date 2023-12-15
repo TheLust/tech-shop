@@ -2,7 +2,7 @@ package md.ceiti.techshopapi.validator;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import md.ceiti.techshopapi.entity.Account;
+import md.ceiti.techshopapi.entity.account.Account;
 import md.ceiti.techshopapi.service.AccountService;
 import md.ceiti.techshopapi.util.ConstraintViolationMessage;
 import md.ceiti.techshopapi.util.ValidationUtils;
@@ -42,7 +42,6 @@ public class AccountValidator implements Validator {
             if (accountService.findByUsername(account.getUsername()).isPresent()) {
                 errors.rejectValue("username", "alreadyExists", ConstraintViolationMessage.ALREADY_EXISTS);
             }
-
         }
 
         if (account.getEmail() != null) {

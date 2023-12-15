@@ -1,14 +1,13 @@
 package md.ceiti.techshopapi.service;
 
 import lombok.RequiredArgsConstructor;
-import md.ceiti.techshopapi.entity.Account;
+import md.ceiti.techshopapi.entity.account.Account;
 import md.ceiti.techshopapi.repository.AccountRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +50,7 @@ public class AccountService {
         return accountRepository.save(oldAccount);
     }
 
+    @Transactional
     private Account updatePassword(Account oldAccount, String newPassword) {
         newPassword = passwordEncoder.encode(newPassword);
         oldAccount.setPassword(newPassword);

@@ -1,4 +1,4 @@
-package md.ceiti.techshopapi.entity;
+package md.ceiti.techshopapi.entity.account;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

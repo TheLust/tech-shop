@@ -4,7 +4,6 @@ import {Router} from "@angular/router";
 import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 import {RegisterDialogComponent} from "../register-dialog/register-dialog.component";
 import {AuthService} from "../../service/auth/auth.service";
-import {jwtDecode} from "jwt-decode";
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +18,7 @@ export class NavbarComponent implements OnInit {
   navRoutes: Map<string, string> = new Map<string, string>([
     ['Home', ''],
     ['About', 'about'],
-    ['Contact Us', 'contact']
+    ['Products', 'products']
   ]);
 
   constructor(public dialog: MatDialog, public router: Router, public authService: AuthService) {
@@ -40,10 +39,10 @@ export class NavbarComponent implements OnInit {
   }
 
   navigate(url: string): void {
-    this.router.navigate([url]);
+    this.router.navigate([url]).then(() => {});
   }
 
-  openLoginDialog(): void {;
+  openLoginDialog(): void {
     this.dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
   }
 
@@ -53,8 +52,6 @@ export class NavbarComponent implements OnInit {
 
   signOut(): void {
     this.authService.removeToken();
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => {});
   }
-
-  protected readonly window = window;
 }

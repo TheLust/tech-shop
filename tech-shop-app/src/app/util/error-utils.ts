@@ -14,7 +14,8 @@ export class ErrorUtils {
     ['containOnlyLettersNumbersPeriods', 'must contain only letters (a-z), numbers (0-9), and periods (.)'],
     ['cannotBeginOrEndWithPeriods','must not begin or end with periods (.)'],
     ['ageLimitation', 'must be 18+'],
-    ['alreadyExists', 'already exists']
+    ['alreadyExists', 'already exists'],
+    ['failed', 'has failed']
   ]);
 
   private static formatCamelCaseToWords(input: string): string {

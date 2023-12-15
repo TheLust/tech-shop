@@ -1,4 +1,4 @@
-package md.ceiti.techshopapi.entity;
+package md.ceiti.techshopapi.entity.account;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountProfileResponse} from "../../model/account-profile-response";
 import {ProfileService} from "../../service/profile/profile.service";
 import {Router} from "@angular/router";
 import {lastValueFrom} from "rxjs";
@@ -7,6 +6,13 @@ import {Location} from "@angular/common";
 import {ErrorUtils} from "../../util/error-utils";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../../util/custom-validators";
+import {AccountProfileResponse, AccountProfileUpdateRequest} from "../../model/account-profile";
+import {ConfirmPasswordDialogComponent} from "../confirm-password-dialog/confirm-password-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {formatDate} from "../../util/date-utils";
+import {AuthService} from "../../service/auth/auth.service";
+import {LoginRequest} from "../../model/login-request";
+import {LoginDialogComponent} from "../login-dialog/login-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +21,14 @@ import {CustomValidators} from "../../util/custom-validators";
 })
 export class ProfileComponent implements OnInit{
 
+  protected readonly ErrorUtils = ErrorUtils;
   account: AccountProfileResponse;
   formGroup: FormGroup;
+  initialFormValue: any;
 
   constructor(private profileService: ProfileService,
+              private authService: AuthService,
+              private dialog: MatDialog,
               private router: Router,
               private location: Location) {
   }
@@ -86,7 +96,12 @@ export class ProfileComponent implements OnInit{
         ]),
     });
 
+    this.initialFormValue = this.formGroup.value;
     this.formGroup.disable();
+  }
+
+  isFormChanged(): boolean {
+    return JSON.stringify(this.initialFormValue) !== JSON.stringify(this.formGroup.value);
   }
 
   private fillForm(): void {
@@ -112,6 +127,64 @@ export class ProfileComponent implements OnInit{
     }
   }
 
+  async update(dialogErrors: Map<string, Map<string, string>>, value: string): Promise<void> {
+    if (this.formGroup.valid) {
+      let updatedAccount: AccountProfileUpdateRequest = this.formGroup.value;
+      updatedAccount.dateOfBirth = formatDate(new Date(this.formGroup.value.dateOfBirth));
+      if (this.formGroup.get('password').untouched || updatedAccount.password === '********') {
+        updatedAccount.password = null;
+      }
+      const dialogRef = this.dialog.open(
+        ConfirmPasswordDialogComponent,
+        {
+          panelClass: 'dialog-transparent-background',
+          data: {
+            errors: dialogErrors,
+            fieldValue: value
+          }
+        }
+      );
+      const result$ = dialogRef.afterClosed();
+      updatedAccount.confirmPassword = await lastValueFrom(result$);
+
+      if (updatedAccount.confirmPassword == null) {
+        return;
+      }
+
+      const resultUpdate$ = this.profileService.update(updatedAccount);
+      try {
+        this.account = await lastValueFrom(resultUpdate$) as AccountProfileResponse;
+        if (this.formGroup.get('password').untouched || updatedAccount.password === '********') {
+          const login2$ = this.authService.login2(
+            new LoginRequest(
+              this.formGroup.value.username,
+              this.formGroup.value.password
+            )
+          );
+
+          try {
+            const token: string = await lastValueFrom(login2$);
+            this.authService.setToken(token);
+          } catch {
+            this.authService.removeToken();
+            this.router.navigate(['']).then(() => {
+              this.dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
+            });
+          }
+        }
+        this.edit(false);
+        this.fillForm();
+      } catch (err) {
+        const errors: Map<string, Map<string, string>> = new Map<string, Map<string, string>>(Object.entries(JSON.parse(JSON.stringify(err.error))));
+        if (errors.has('confirmation')) {
+          await this.update(errors, updatedAccount.confirmPassword);
+        } else {
+          ErrorUtils.setErrors(this.formGroup, errors);
+        }
+      }
+    }
+  }
+
   done(): void {
     if (this.location.getState()["navigationId"] !== 1) {
       this.location.back();
@@ -119,6 +192,4 @@ export class ProfileComponent implements OnInit{
       this.router.navigate(['']).then(() => {});
     }
   }
-
-  protected readonly ErrorUtils = ErrorUtils;
 }

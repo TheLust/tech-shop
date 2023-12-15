@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import md.ceiti.techshopapi.dto.request.AccountProfileUpdateRequest;
 import md.ceiti.techshopapi.dto.request.RegisterRequest;
 import md.ceiti.techshopapi.dto.response.AccountProfileResponse;
-import md.ceiti.techshopapi.entity.Account;
-import md.ceiti.techshopapi.entity.Role;
+import md.ceiti.techshopapi.entity.account.Account;
+import md.ceiti.techshopapi.entity.account.Role;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

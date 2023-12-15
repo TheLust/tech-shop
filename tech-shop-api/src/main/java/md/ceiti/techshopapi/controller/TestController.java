@@ -1,7 +1,7 @@
 package md.ceiti.techshopapi.controller;
 
 import jakarta.validation.Valid;
-import md.ceiti.techshopapi.entity.Account;
+import md.ceiti.techshopapi.entity.account.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

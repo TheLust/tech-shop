@@ -9,10 +9,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Importing Datepicker SCSS file. */
 @import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-app-forbidden, app-not-found, app-home, app-profile {
+app-forbidden, app-not-found, app-home, app-profile, app-about {
   font-family: 'Exo 2', sans-serif;
   display:flex;
-  height: 100%;
   margin: 0;
   padding: 65px 0 0;
   position: relative;
@@ -163,7 +162,7 @@ div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
 }
 
 .form-container {
-  max-width: 575px;
+  max-width: 600px;
   width: 90%;
   height: auto;
   margin: auto auto auto auto;
@@ -171,6 +170,16 @@ div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
   box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
   border-radius: 20px;
   padding: 10px;
+  color: white;
+}
+
+.form-container .title {
+  font-weight:900;
+  letter-spacing: 3px;
+  font-size: 2em;
+  text-align: center;
+  line-height: normal;
+  font-family: "Raleway", sans-serif;
 }
 
 .white-divider {

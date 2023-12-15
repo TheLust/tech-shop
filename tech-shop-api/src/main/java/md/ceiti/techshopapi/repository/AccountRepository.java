@@ -1,6 +1,6 @@
 package md.ceiti.techshopapi.repository;
 
-import md.ceiti.techshopapi.entity.Account;
+import md.ceiti.techshopapi.entity.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

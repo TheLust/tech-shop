@@ -5,6 +5,7 @@ import {baseUrl} from "../../../environments/environment";
 import {FormGroup} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 import {jwtDecode} from "jwt-decode";
+import {LoginRequest} from "../../model/login-request";
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,10 @@ export class AuthService {
 
   login(formGroup: FormGroup): Observable<any> {
     return this.http.post(`${baseUrl}/auth/login`, formGroup.value, {responseType: 'text'});
+  }
+
+  login2(loginRequest: LoginRequest): Observable<any> {
+    return this.http.post(`${baseUrl}/auth/login`, loginRequest, {responseType: 'text'});
   }
 
   register(formGroup: FormGroup): Observable<any> {

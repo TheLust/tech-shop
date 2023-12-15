@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import md.ceiti.techshopapi.dto.request.AccountProfileUpdateRequest;
 import md.ceiti.techshopapi.dto.response.AccountProfileResponse;
-import md.ceiti.techshopapi.entity.AccountDetails;
+import md.ceiti.techshopapi.entity.account.AccountDetails;
 import md.ceiti.techshopapi.facade.ProfileFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
