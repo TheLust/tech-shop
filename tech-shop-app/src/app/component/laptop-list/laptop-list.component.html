@@ -1,0 +1,61 @@
+<div class="full-page-container">
+  <div class="title">Laptops</div>
+  <div class="sort-menu-container">
+    <mat-form-field appearance="outline" class="white-field" id="sorter">
+      <mat-select [(ngModel)]="sort" panelClass="dark-background">
+        <mat-option value="new">
+          New
+        </mat-option>
+        <mat-option value="price-asc">
+          Price ↓
+        </mat-option>
+        <mat-option value="price-desc">
+          Price ↑
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="product-container">
+    <div class="filter-container">
+      <mat-accordion class="transparent-background" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Price
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="filter-content">
+            <mat-slider min="0" max="100000">
+              <input value="0" matSliderStartThumb>
+              <input value="100000" matSliderEndThumb>
+            </mat-slider>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Producer
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Category
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Processor
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="product-list-container">
+      div.
+    </div>
+  </div>
+</div>

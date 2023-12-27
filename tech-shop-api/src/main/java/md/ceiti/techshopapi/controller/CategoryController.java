@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import md.ceiti.techshopapi.dto.request.CategoryRequest;
 import md.ceiti.techshopapi.dto.response.CategoryResponse;
-import md.ceiti.techshopapi.dto.response.ParentCategoryResponse;
 import md.ceiti.techshopapi.facade.CategoryFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +19,10 @@ public class CategoryController {
 
     private final CategoryFacade categoryFacade;
 
-    @GetMapping(value = "/parents")
-    public ResponseEntity<List<ParentCategoryResponse>> findAllParentCategories() {
+    @GetMapping(value = "")
+    public ResponseEntity<List<CategoryResponse>> findAllParentCategories() {
         return new ResponseEntity<>(
-                categoryFacade.findAllParentCategories(),
+                categoryFacade.findAll(),
                 HttpStatus.OK
         );
     }
@@ -34,6 +33,17 @@ public class CategoryController {
                                                  BindingResult bindingResult) {
         return new ResponseEntity<>(
                 categoryFacade.save(parentId, categoryRequest, bindingResult),
+                HttpStatus.OK
+        );
+    }
+
+    @PutMapping(value = "")
+    public ResponseEntity<CategoryResponse> update(@RequestParam(value = "id") Long id,
+                                                   @RequestParam(value = "parentId", required = false) Long parentId,
+                                                   @RequestBody @Valid CategoryRequest categoryRequest,
+                                                   BindingResult bindingResult) {
+        return new ResponseEntity<>(
+                categoryFacade.update(id, parentId, categoryRequest, bindingResult),
                 HttpStatus.OK
         );
     }

@@ -6,6 +6,10 @@ import {FormGroup} from "@angular/forms";
 import {CookieService} from "ngx-cookie-service";
 import {jwtDecode} from "jwt-decode";
 import {LoginRequest} from "../../model/login-request";
+import {LoginDialogComponent} from "../../component/login-dialog/login-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {RegisterDialogComponent} from "../../component/register-dialog/register-dialog.component";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +18,10 @@ export class AuthService {
 
   private readonly tokenKey: string = 'jwtToken';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient,
+              private cookieService: CookieService,
+              private dialog: MatDialog,
+              private router: Router) {}
 
   getToken(): string | null {
     return this.cookieService.get(this.tokenKey);
@@ -79,5 +86,18 @@ export class AuthService {
 
   register(formGroup: FormGroup): Observable<any> {
     return this.http.post(`${baseUrl}/auth/register`, formGroup.value, {responseType: 'text'});
+  }
+
+  openLoginDialog(): void {
+    this.dialog.open(LoginDialogComponent, { panelClass: 'transparent-blur' });
+  }
+
+  openRegisterDialog(): void {
+    this.dialog.open(RegisterDialogComponent, { panelClass: 'transparent-blur' });
+  }
+
+  signOut(): void {
+    this.removeToken();
+    this.router.navigate(['']).then(() => {});
   }
 }

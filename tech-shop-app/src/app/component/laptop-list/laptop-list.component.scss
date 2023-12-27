@@ -1,0 +1,7 @@
+#sorter {
+  width: 120px;
+}
+
+::ng-deep #sorter .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 15px;
+}

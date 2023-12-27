@@ -50,7 +50,7 @@ export class LoginDialogComponent implements OnInit, OnDestroy {
   }
 
   openRegisterDialog(): void {
-    this.dialog.open(RegisterDialogComponent, { panelClass: 'dialog-transparent-background' });
+    this.authService.openRegisterDialog();
     this.destroyNextPage = false;
     this.dialogRef.close();
   }

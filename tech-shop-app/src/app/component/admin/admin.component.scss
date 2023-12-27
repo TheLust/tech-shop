@@ -1,0 +1,19 @@
+.full-page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-container {
+  height: 80px;
+  margin-right: 20px;
+}
+
+.crud-container {
+  width: 100%;
+}
+
+@media (max-width: 766px) {
+  .full-page-container {
+    flex-direction: column;
+  }
+}

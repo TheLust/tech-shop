@@ -1,6 +1,4 @@
-import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -31,9 +29,21 @@ import {MatMenuModule} from "@angular/material/menu";
 import {ProfileComponent} from './component/profile/profile.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatDividerModule} from "@angular/material/divider";
-import { ConfirmPasswordDialogComponent } from './component/confirm-password-dialog/confirm-password-dialog.component';
-import { AboutComponent } from './component/about/about.component';
-import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {ConfirmPasswordDialogComponent} from './component/confirm-password-dialog/confirm-password-dialog.component';
+import {AboutComponent} from './component/about/about.component';
+import {LaptopListComponent} from './component/laptop-list/laptop-list.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatSliderModule} from "@angular/material/slider";
+import {MatListModule} from "@angular/material/list";
+import {LaptopCrudComponent} from './component/laptop-crud/laptop-crud.component';
+import {MatTableModule} from "@angular/material/table";
+import {APP_INITIALIZER, NgModule} from "@angular/core";
+import {ProductService} from "./service/product/product.service";
+import {MatPaginatorModule} from "@angular/material/paginator";
+
+export function initializeApp(productService: ProductService) {
+    return () => productService.initialize();
+}
 
 @NgModule({
   declarations: [
@@ -47,37 +57,52 @@ import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontaweso
     RegisterDialogComponent,
     ProfileComponent,
     ConfirmPasswordDialogComponent,
-    AboutComponent
+    AboutComponent,
+    LaptopListComponent,
+    LaptopCrudComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatCardModule,
-    MatToolbarModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    NgxMatIntlTelInputComponent,
-    MatDialogModule,
-    MatStepperModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatDividerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatToolbarModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        NgxMatIntlTelInputComponent,
+        MatDialogModule,
+        MatStepperModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatSliderModule,
+        MatListModule,
+        MatTableModule,
+        MatPaginatorModule
+    ],
   providers: [
-    CookieService
+    CookieService,
+    ProductService,
+    {
+        provide: APP_INITIALIZER,
+        useFactory: initializeApp,
+        deps: [ProductService],
+        multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

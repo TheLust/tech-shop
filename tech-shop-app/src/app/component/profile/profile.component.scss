@@ -13,9 +13,9 @@ form {
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  @media screen and ( max-width: 767px )  {
+  @media screen and ( max-width: 766px )  {
     flex-direction: column;
-    width: 70%;
+    width: 80%;
   }
 }
 
@@ -28,7 +28,7 @@ mat-form-field {
   }
 }
 
-.edit-button-container {
+.button-container {
   width: 100%;
   display: flex;
   justify-content: space-between;

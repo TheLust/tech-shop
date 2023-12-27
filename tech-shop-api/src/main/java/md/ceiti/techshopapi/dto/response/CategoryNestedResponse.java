@@ -3,12 +3,11 @@ package md.ceiti.techshopapi.dto.response;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
-public class ParentCategoryResponse {
+public class CategoryNestedResponse {
 
+    private Long id;
+    private CategoryNestedResponse parent;
     private String name;
-    private List<String> subCategories;
 }

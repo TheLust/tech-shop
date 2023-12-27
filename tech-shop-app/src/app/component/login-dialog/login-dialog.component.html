@@ -1,22 +1,20 @@
 <div mat-dialog-content>
-  <div id="container">
-    <form [formGroup]="formGroup" (ngSubmit)="login()">
-      <img [src]="randomImageSrc" alt=""><br>
-      <mat-form-field appearance="outline" style="margin-top: 20px">
-        <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="" value="" formControlName="username">
-        <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="" formControlName="password">
-        <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
-      </mat-form-field>
-      <button mat-button type="submit">Sign in</button><br>
-      <span><a [routerLink]="">Forgot Password?</a></span><br>
-      <span><a [routerLink]="" (click)="openRegisterDialog()">No account? Sign up!</a></span>
-    </form>
-  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="login()">
+    <img [src]="randomImageSrc" alt=""><br>
+    <mat-form-field appearance="outline" style="margin-top: 20px" class="white-field">
+      <mat-icon matPrefix class="white-icon">person_outline</mat-icon>
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="" value="" formControlName="username">
+      <mat-error>{{ ErrorUtils.getError("username", formGroup.get("username").errors) }}</mat-error>
+    </mat-form-field><br>
+    <mat-form-field appearance="outline" class="white-field">
+      <mat-icon matPrefix class="white-icon">lock_outline</mat-icon>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="" formControlName="password">
+      <mat-error>{{ ErrorUtils.getError("password", formGroup.get("password").errors) }}</mat-error>
+    </mat-form-field><br>
+    <button mat-button class="white-button" type="submit">Sign in</button><br>
+    <span><a [routerLink]="">Forgot Password?</a></span><br>
+    <span><a [routerLink]="" (click)="openRegisterDialog()">No account? Sign up!</a></span>
+  </form>
 </div>

@@ -1,77 +1,474 @@
-/* You can add global styles to this file, and also import other style files */
+@import "app/util/variables";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//html, body { height: 100%; }
+//body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//
+//app-forbidden, app-not-found, app-home, app-profile, app-about, app-laptop-list, app-admin {
+//  font-family: 'Exo 2', sans-serif;
+//  display:flex;
+//  margin: 0;
+//  padding: 65px 0 0;
+//  position: relative;
+//  min-height: 100vh;
+//  background-color: #171c24;
+//  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='264' height='264' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%231c212e' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%232d4b4d'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
+//}
+//
+//.dialog-transparent-background {
+//
+//  > mat-dialog-container .mdc-dialog__surface {
+//    background-color: transparent !important;
+//    backdrop-filter: blur(10px);
+//    border-radius: 8px !important;
+//    overflow: hidden;
+//  }
+//
+//  > mat-dialog-container .mat-mdc-dialog-content {
+//    overflow: hidden;
+//  }
+//
+//  > mat-dialog-container .material-icons {
+//    font-family: 'Material Icons', serif !important;
+//  }
+//}
+//
+//.dialog-transparent-background > mat-dialog-container
+//.mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled) {
+//  .mdc-notched-outline > * {
+//    border-color: white !important;
+//  }
+//
+//  label {
+//    color: white !important;
+//  }
+//}
+//
+//// white form field
+//
+//.white-field .mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled),
+//.white-field .mdc-text-field--disabled {
+//  .mdc-notched-outline > * {
+//    border-color: white !important;
+//  }
+//
+//  label {
+//    color: white !important;
+//  }
+//}
+//
+//.white-field mat-hint,
+//.white-field mat-select,
+//.white-field mat-select svg,
+//.white-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,
+//.white-field .mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input,
+//.white-field ngx-mat-intl-tel-input .country-selector-code {
+//  color: white;
+//}
+//
+//// ngx-mat-intl-tel-input
+//
+//.ngx-mat-tel-input-mat-menu-panel,
+//.ngx-mat-tel-input-mat-menu-panel input{
+//  background-color: #171c24 !important;
+//}
+//
+//.ngx-mat-tel-input-mat-menu-panel button,
+//.ngx-mat-tel-input-mat-menu-panel input{
+//  color: white !important;
+//}
+//
+//.ngx-mat-tel-input-mat-menu-panel::-webkit-scrollbar {
+//  background: transparent;
+//}
+//
+//.ngx-mat-tel-input-mat-menu-panel::-webkit-scrollbar-thumb {
+//  background: white;
+//  border-radius: 10px;
+//  border: 5px solid transparent;
+//  background-clip: content-box;
+//}
+//
+//// icons
+//
+//.white-icon {
+//  color: white;
+//
+//  svg {
+//    fill: white;
+//  }
+//}
+//
+//// menu
+//
+//.menu-transparent-background {
+//  background-color: transparent !important;
+//  backdrop-filter: blur(10px);
+//
+//  .mat-mdc-menu-item, .mat-mdc-menu-item:visited, .mat-mdc-menu-item:link {
+//    color: white;
+//  }
+//
+//  .mat-mdc-menu-item .mat-icon-no-color, .mat-mdc-menu-item .mat-mdc-menu-submenu-icon {
+//    color: white !important;
+//  }
+//
+//  mat-dialog-container app-register-dialog form mat-stepper .mat-horizontal-content-container {
+//    padding-bottom: 0;
+//  }
+//}
+//
+//// dark background for panels
+//
+//.dark-background {
+//  background-color: #171c24 !important;
+//
+//  mat-option {
+//    color: white;
+//  }
+//}
+//
+//mat-datepicker-content:has(mat-calendar.dark-background) {
+//  background-color: #171c24;
+//  color: white !important;
+//}
+//
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-body-cell-content,
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-body-label,
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-table-header th,
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-mdc-button:not(:disabled),
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-previous-button,
+//mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-next-button{
+//  color: white;
+//}
+//
+//mat-datepicker-content:has(mat-calendar.dark-background) {
+//  .mat-calendar-arrow {
+//    fill: white;
+//  }
+//
+//  .mat-calendar-table-header-divider::after {
+//    background: white;
+//  }
+//}
+//
+//div[role="listbox"].dark-background.mat-mdc-select-panel {
+//  background-color: #171c24;
+//
+//  mat-option {
+//    color: white;
+//  }
+//}
+//
+//// white divider
+//
+//.white-divider {
+//  border-top-color: white !important;
+//}
+//
+//// white button
+//
+//.white-button {
+//  min-width: 100px !important;
+//  width: 100px;
+//  background: transparent !important;
+//  border: 1px solid white !important;
+//  color: white !important;
+//  margin-top: auto;
+//  margin-bottom: auto;
+//
+//  .mat-mdc-button:not(:disabled) {
+//    color: white;
+//  }
+//
+//  :hover {
+//    border: 1px solid var(--mat-badge-background-color) !important;
+//  }
+//}
+//
+//// **************************************8
+//// containers
+//
+//.form-container {
+//  max-width: 600px;
+//  width: 90%;
+//  height: auto;
+//  margin: auto auto auto auto;
+//  background: rgba(5, 13, 25, 0.569);
+//  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
+//  border-radius: 20px;
+//  padding: 10px;
+//  color: white;
+//
+//  .title {
+//    font-weight:900;
+//    letter-spacing: 3px;
+//    font-size: 2em;
+//    text-align: center;
+//    line-height: normal;
+//    font-family: "Raleway", sans-serif;
+//  }
+//}
+//
+//.full-page-container {
+//  width: 100%;
+//  background: rgba(5, 13, 25, 0.569);
+//  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
+//  border-radius: 20px;
+//  padding: 20px;
+//  color: white;
+//
+//  .title {
+//    font-size: 32px;
+//    font-weight: 700;
+//    line-height: 2;
+//  }
+//
+//  .sort-menu-container {
+//    width: 100%;
+//    height: auto;
+//    display: flex;
+//    align-items: flex-end;
+//    flex-direction: column;
+//  }
+//
+//  .product-container {
+//    display: table;
+//    width: 100%;
+//
+//    .filter-container  {
+//      display: table-cell;
+//      width: 25%;
+//      background: $sub-container-color;
+//      border-radius: 20px;
+//
+//      .filter-content{
+//        width: 100%;
+//
+//        mat-slider {
+//          width: calc(100% - 16px);
+//        }
+//      }
+//    }
+//
+//    .product-list-container {
+//      display: table-cell;
+//      padding: 0 20px 0 20px;
+//    }
+//  }
+//}
+//
+//// *************************88
+//
+//// transparent background
+//
+//.transparent-background {
+//  background: transparent;
+//}
+//
+//// for accordion
+//
+//mat-accordion.transparent-background mat-expansion-panel {
+//  background: transparent;
+//}
+//
+//mat-accordion.transparent-background {
+//  .mat-expansion-panel-header-title, .mat-expansion-indicator::after {
+//    color: white;
+//  }
+//}
+//
+//// for table
+//
+//table[mat-table].transparent-background {
+//  background-color: transparent;
+//  border: 1px solid white;
+//
+//  thead {
+//    outline: thin solid white;
+//  }
+//
+//  tr {
+//    color: white;
+//  }
+//}
+//
+////for paginator
+//
+//mat-paginator.transparent-background {
+//  background-color: transparent;
+//  border: 1px solid white;
+//
+//  .mat-mdc-paginator-outer-container, .mat-mdc-paginator {
+//    color: white;
+//  }
+//
+//  .mat-mdc-paginator-icon {
+//    fill: white !important;
+//  }
+//}
+//
+////***********************************
+//
+//// panel transparent background + dark-theme-background
+//
+//.panel-transparent-background {
+//  background: $sub-container-color !important;
+//
+//  mat-option {
+//    color: white;
+//  }
+//}
+//
+//.panel-dark-background {
+//  background: #171c24 !important;
+//
+//  mat-option {
+//    color: white;
+//  }
+//}
+//
+//// ***************
+//// crud
+//
+//.crud-sub-container {
+//  width: 100%;
+//  display: flex;
+//  flex-direction: row;
+//
+//  .mat-elevation-z8 {
+//    width: 100%;
+//  }
+//
+//  .button-container {
+//    width: min-content;
+//
+//    button {
+//      border-radius: 5px;
+//    }
+//  }
+//}
+//
+//.mat-elevation-z8 {
+//  box-shadow: none;
+//}
+//
+//@media (max-width: 766px) {
+//  .crud-sub-container {
+//    flex-direction: column;
+//    justify-content: flex-end;
+//  }
+//
+//  .crud-sub-container .button-container {
+//    display: flex;
+//    flex-direction: row;
+//  }
+//}
 
-/* Importing Bootstrap SCSS file. */
-@import "../node_modules/bootstrap/scss/bootstrap";
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
 
-/* Importing Datepicker SCSS file. */
-@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+// basic elements
 
-app-forbidden, app-not-found, app-home, app-profile, app-about {
-  font-family: 'Exo 2', sans-serif;
+body {
+  font-family: "Raleway", sans-serif;
+  color: white;
   display:flex;
   margin: 0;
-  padding: 65px 0 0;
   position: relative;
   min-height: 100vh;
-  background-color: #171c24;
+  background-color: $dark-background-color;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='264' height='264' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%231c212e' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%232d4b4d'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.dialog-transparent-background > mat-dialog-container .mdc-dialog__surface {
-  background-color: transparent !important;
-  backdrop-filter: blur(10px);
-  border-radius: 8px !important;
-  overflow: hidden;
+app-profile, app-about {
+  display: flex;
+  height: $full-page-container;
 }
 
-.dialog-transparent-background > mat-dialog-container .mat-mdc-dialog-content {
-  overflow: hidden;
-}
+a {
+  text-decoration: none;
 
-.dialog-transparent-background > mat-dialog-container .material-icons {
-  font-family: 'Material Icons', serif !important;
-}
-
-.dialog-transparent-background > mat-dialog-container
-.mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled) {
-  .mdc-notched-outline > * {
-    border-color: white !important;
-  }
-
-  label {
-    color: white !important;
+  &:hover {
+    color: $primary-color;
+    cursor: pointer;
   }
 }
 
-// white form field
+mat-stepper[hide-header] .mat-horizontal-stepper-header-container {
+  display: none;
+}
 
-.white-field .mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled),
-.white-field .mdc-text-field--disabled {
-  .mdc-notched-outline > * {
-    border-color: white !important;
-  }
+mat-stepper[no-content-padding] .mat-horizontal-content-container {
+  padding: 0;
+}
 
-  label {
-    color: white !important;
+// containers
+
+.center-container {
+  max-width: 768px;
+  width: 100%;
+  margin: auto;
+  background: $container-color;
+  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  padding: 10px;
+  color: inherit;
+
+  .title {
+    font-weight:900;
+    letter-spacing: 3px;
+    font-size: 2em;
+    text-align: center;
+    line-height: normal;
   }
 }
 
-.white-field mat-hint,
-.white-field mat-select,
-.white-field mat-select svg,
-.white-field .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,
-.white-field .mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input,
-.white-field ngx-mat-intl-tel-input .country-selector-code {
-  color: white;
+// transparent blur
+
+.transparent-blur:has(mat-dialog-container) {
+  backdrop-filter: blur(1px) !important;
 }
 
-// dark background
+.transparent-blur {
+  background: transparent !important;
+  backdrop-filter: blur(10px) !important;
+  color: white !important;
+
+  mat-option {
+    color: inherit;
+  }
+
+  .mat-mdc-menu-item {
+    color: inherit;
+
+    .mat-mdc-menu-submenu-icon {
+      color: inherit;
+    }
+  }
+
+  mat-dialog-container {
+    .mdc-dialog__surface {
+      background-color: transparent;
+    }
+
+    .mdc-dialog__content {
+      width: auto;
+      height: auto;
+      color: inherit;
+      overflow-x: hidden;
+    }
+  }
+}
+
+// calendar
 
 mat-datepicker-content:has(mat-calendar.dark-background) {
-  background-color: #171c24;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
   color: white !important;
 }
 
@@ -84,31 +481,25 @@ mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-next-butt
   color: white;
 }
 
-mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-arrow {
-  fill: white;
+mat-datepicker-content:has(mat-calendar.dark-background) {
+  .mat-calendar-arrow {
+    fill: white;
+  }
+
+  .mat-calendar-table-header-divider::after {
+    background: white;
+  }
 }
 
-mat-datepicker-content:has(mat-calendar.dark-background) .mat-calendar-table-header-divider::after {
-  background: white;
-}
-
-div[role="listbox"].dark-background.mat-mdc-select-panel {
-  background-color: #171c24;
-}
-
-div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
-  color: white;
-}
-
-// ngx-mat-intl-tel-input
+// phone number panel
 
 .ngx-mat-tel-input-mat-menu-panel,
-.ngx-mat-tel-input-mat-menu-panel input{
+.ngx-mat-tel-input-mat-menu-panel input {
   background-color: #171c24 !important;
 }
 
 .ngx-mat-tel-input-mat-menu-panel button,
-.ngx-mat-tel-input-mat-menu-panel input{
+.ngx-mat-tel-input-mat-menu-panel input {
   color: white !important;
 }
 
@@ -123,67 +514,36 @@ div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
   background-clip: content-box;
 }
 
-// icons
+// white field
 
-.white-icon {
-  color: white;
-}
+.white-field {
+  .mdc-text-field:not(.mdc-text-field--invalid):not(.mdc-text-field--focused):not(.mdc-text-field--disabled),
+  .mdc-text-field--disabled {
+    .mdc-notched-outline > * {
+      border-color: white !important;
+    }
 
-.white-icon svg {
-  fill: white;
-}
+    label {
+      color: white !important;
+    }
+  }
 
-// menu
+  mat-hint,
+  mat-select,
+  mat-select svg,
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-text-field__input,
+  .mdc-text-field--outlined.mdc-text-field--disabled .mdc-text-field__input,
+  ngx-mat-intl-tel-input .country-selector-code {
+    color: white;
+  }
 
-.menu-transparent-background {
-  background-color: transparent !important;
-  backdrop-filter: blur(10px);
-}
+  mat-icon {
+    color: white;
 
-.menu-transparent-background .mat-mdc-menu-item, .mat-mdc-menu-item:visited, .mat-mdc-menu-item:link {
-  color: white;
-  //filter: opacity(0.8);
-}
-
-.menu-transparent-background .mat-mdc-menu-item .mat-icon-no-color, .mat-mdc-menu-item .mat-mdc-menu-submenu-icon {
-  color: white !important;
-}
-
-.dialog-transparent-background mat-dialog-container app-register-dialog form mat-stepper .mat-horizontal-content-container {
-  padding-bottom: 0;
-}
-
-.mat-select-dark-background {
-  background-color: #171c24 !important;
-}
-
-.mat-select-dark-background mat-option {
-  color: white;
-}
-
-.form-container {
-  max-width: 600px;
-  width: 90%;
-  height: auto;
-  margin: auto auto auto auto;
-  background: rgba(5, 13, 25, 0.569);
-  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
-  border-radius: 20px;
-  padding: 10px;
-  color: white;
-}
-
-.form-container .title {
-  font-weight:900;
-  letter-spacing: 3px;
-  font-size: 2em;
-  text-align: center;
-  line-height: normal;
-  font-family: "Raleway", sans-serif;
-}
-
-.white-divider {
-  border-top-color: white !important;
+    svg {
+      fill: white;
+    }
+  }
 }
 
 // white button
@@ -193,16 +553,18 @@ div[role="listbox"].dark-background.mat-mdc-select-panel mat-option {
   width: 100px;
   background: transparent !important;
   border: 1px solid white !important;
-  color: white !important;
+  color: inherit !important;
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 10px;
+
+  .mat-mdc-button:not(:disabled) {
+    color: white;
+  }
+
+  &:hover {
+    border: 2px solid $primary-color !important;
+  }
 }
 
-.white-button .mat-mdc-button:not(:disabled) {
-  color: white;
-}
 
-.white-button:hover{
-  border: 1px solid var(--mat-badge-background-color) !important;
-}
 

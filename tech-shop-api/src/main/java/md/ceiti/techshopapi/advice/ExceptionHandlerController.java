@@ -1,5 +1,6 @@
 package md.ceiti.techshopapi.advice;
 
+import md.ceiti.techshopapi.exception.NotFoundException;
 import md.ceiti.techshopapi.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,14 @@ public class ExceptionHandlerController {
     @ExceptionHandler
     private ResponseEntity<Map<String, Map<String, String>>> handleException(ValidationException e) {
          return new ResponseEntity<>(
+                e.getErrors(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<Map<String, Map<String, String>>> handleException(NotFoundException e) {
+        return new ResponseEntity<>(
                 e.getErrors(),
                 HttpStatus.BAD_REQUEST
         );

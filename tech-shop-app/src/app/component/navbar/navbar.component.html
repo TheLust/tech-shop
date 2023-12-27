@@ -3,20 +3,18 @@
     <a [routerLink]="" (click)="navigate('')">TECHSHOP</a>
   </div>
 
-<!--  <input type="checkbox" class="menu-btn" id="menu-btn" [(ngModel)]="menu">-->
-<!--  <label for="menu-btn" class="menu-icon">-->
-<!--    <span class="menu-icon__line"></span>-->
-<!--  </label>-->
-
   <ul *ngIf="!mobile" class="nav-links">
     <li class="nav-link" *ngFor="let route of getRoutes()">
       <a [routerLink]="" (click)='navigate(navRoutes.get(route))'>{{ route }}</a>
     </li>
-    <li *ngIf="!authService.getToken()" class="nav-link">
-      <a [routerLink]="" (click)="openLoginDialog()">Sign in</a>
+    <li class="nav-link">
+      <a [matMenuTriggerFor]="productMenu">Products</a>
     </li>
     <li *ngIf="!authService.getToken()" class="nav-link">
-      <a [routerLink]="" (click)="openRegisterDialog()">Sign up</a>
+      <a [routerLink]="" (click)="authService.openLoginDialog()">Sign in</a>
+    </li>
+    <li *ngIf="!authService.getToken()" class="nav-link">
+      <a [routerLink]="" (click)="authService.openRegisterDialog()">Sign up</a>
     </li>
     <li *ngIf="authService.getToken()" class="nav-link">
       <a [matMenuTriggerFor]="accountMenu">Hi, {{ username }}</a>
@@ -27,19 +25,24 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <mat-menu #menu="matMenu" xPosition="before" class="menu-transparent-background">
-    <button mat-menu-item *ngFor="let route of getRoutes()" (click)='navigate(navRoutes.get(route))'>{{ route }}</button>
-    <button mat-menu-item *ngIf="authService.getToken()" [matMenuTriggerFor]="accountMenu">Hi, {{ username }}</button>
-    <button mat-menu-item *ngIf="!authService.getToken()" (click)="openLoginDialog()">Sign in</button>
-    <button mat-menu-item *ngIf="!authService.getToken()" (click)="openRegisterDialog()">Sign up</button>
+  <mat-menu #productMenu="matMenu" xPosition="after" yPosition="above" class="transparent-blur">
+    <button mat-menu-item (click)="navigate('laptops')">Laptops</button>
   </mat-menu>
 
-  <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="above" class="menu-transparent-background">
+  <mat-menu #menu="matMenu" xPosition="before" class="transparent-blur">
+    <button mat-menu-item *ngFor="let route of getRoutes()" (click)='navigate(navRoutes.get(route))'>{{ route }}</button>
+    <button mat-menu-item [matMenuTriggerFor]="productMenu">Products</button>
+    <button mat-menu-item *ngIf="authService.getToken()" [matMenuTriggerFor]="accountMenu">Hi, {{ username }}</button>
+    <button mat-menu-item *ngIf="!authService.getToken()" (click)="authService.openLoginDialog()">Sign in</button>
+    <button mat-menu-item *ngIf="!authService.getToken()" (click)="authService.openRegisterDialog()">Sign up</button>
+  </mat-menu>
+
+  <mat-menu #accountMenu="matMenu" xPosition="before" yPosition="above" class="transparent-blur">
     <button mat-menu-item (click)="router.navigate(['profile'])">Profile</button>
     <button mat-menu-item>Orders</button>
     <button mat-menu-item>Wishes</button>
 <!--    <button mat-menu-item>Recommendations</button>-->
-    <button mat-menu-item (click)="signOut()">Sign out</button>
+    <button mat-menu-item (click)="authService.signOut()">Sign out</button>
   </mat-menu>
 
 </header>

@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="center-container">
   <form *ngIf="formGroup && account" [formGroup]="formGroup" (ngSubmit)="update(null, null)">
     <h1 class="title">Profile</h1>
 
@@ -36,7 +36,7 @@
 
       <mat-form-field appearance="outline" class="white-field">
         <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender" panelClass="dark-background">
+        <mat-select formControlName="gender" panelClass="transparent-blur">
           <mat-option value="MALE">Male</mat-option>
           <mat-option value="FEMALE">Female</mat-option>
           <mat-option value="OTHER">Other</mat-option>
@@ -76,11 +76,11 @@
         <mat-error>{{ ErrorUtils.getError("phoneNumber", formGroup.get("phoneNumber").errors) }}</mat-error>
       </mat-form-field>
 
-      <div *ngIf="formGroup?.disabled" class="edit-button-container">
+      <div *ngIf="formGroup?.disabled" class="button-container">
         <button mat-button (click)="done()" class="white-button">Done</button>
         <button mat-button (click)="edit(true)" class="white-button">Edit</button>
       </div>
-      <div *ngIf="formGroup?.enabled" class="edit-button-container">
+      <div *ngIf="formGroup?.enabled" class="button-container">
         <button mat-button (click)="edit(false)" class="white-button">Cancel</button>
         <button mat-button class="white-button" type="submit" [disabled]="!isFormChanged()">Save</button>
       </div>

@@ -137,7 +137,7 @@ export class ProfileComponent implements OnInit{
       const dialogRef = this.dialog.open(
         ConfirmPasswordDialogComponent,
         {
-          panelClass: 'dialog-transparent-background',
+          panelClass: 'transparent-blur',
           data: {
             errors: dialogErrors,
             fieldValue: value
@@ -168,7 +168,7 @@ export class ProfileComponent implements OnInit{
           } catch {
             this.authService.removeToken();
             this.router.navigate(['']).then(() => {
-              this.dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
+              this.authService.openLoginDialog()
             });
           }
         }
