@@ -427,16 +427,30 @@ mat-stepper[no-content-padding] .mat-horizontal-content-container {
   }
 }
 
+.full-page-container {
+  margin: auto;
+  background: $container-color;
+  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  padding: 10px;
+  color: inherit;
+
+  @media (min-width: 766px) {
+    padding: 20px;
+  }
+}
+
 // transparent blur
 
 .transparent-blur:has(mat-dialog-container) {
-  backdrop-filter: blur(1px) !important;
+  backdrop-filter: blur(2px) !important;
 }
 
 .transparent-blur {
-  background: transparent !important;
+  background: rgba($container-color, 0.7) !important;
   backdrop-filter: blur(10px) !important;
   color: white !important;
+  border-radius: 20px;
 
   mat-option {
     color: inherit;
@@ -467,7 +481,7 @@ mat-stepper[no-content-padding] .mat-horizontal-content-container {
 // calendar
 
 mat-datepicker-content:has(mat-calendar.dark-background) {
-  background-color: transparent;
+  background-color: $panel-color;
   backdrop-filter: blur(10px);
   color: white !important;
 }
@@ -495,7 +509,7 @@ mat-datepicker-content:has(mat-calendar.dark-background) {
 
 .ngx-mat-tel-input-mat-menu-panel,
 .ngx-mat-tel-input-mat-menu-panel input {
-  background-color: #171c24 !important;
+  background-color: $panel-color !important;
 }
 
 .ngx-mat-tel-input-mat-menu-panel button,

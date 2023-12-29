@@ -14,6 +14,7 @@ public class ProductRequest {
     private Double price;
     private DiscountType discountType;
     private Double discount;
+    private Integer available;
     private Map<String, String> general;
     private Map<String, String> display;
     private Map<String, String> processor;

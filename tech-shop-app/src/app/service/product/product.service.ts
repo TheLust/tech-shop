@@ -1,28 +1,28 @@
 import {Injectable} from '@angular/core';
-import {Laptop} from "../../model/product";
+import {Product} from "../../model/product";
 import {HttpClient} from "@angular/common/http";
 import {baseUrl} from "../../../environments/environment";
-import {lastValueFrom, Observable} from "rxjs";
+import {lastValueFrom, map, Observable} from "rxjs";
 import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private laptops: Laptop[];
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  async initialize(): Promise<void> {
-    const laptops$: Observable<any> = this.http.get(`${baseUrl}/products?category=Laptops`);
+  public async getProducts(category: string): Promise<Product[]> {
+    let url: string = `${baseUrl}/products`;
+    url += category !== null ? ('?category=' + category) : '';
+    const products$: Observable<Product[]> = this.http.get<Product[]>(url);
     try {
-        this.laptops = await lastValueFrom(laptops$) as Laptop[];
-    } catch {
+      return await lastValueFrom(products$.pipe(
+        map((products: Product[]) => products.map(productJson => Object.assign(new Product(), productJson)))
+      ));
+    } catch(err) {
       this.router.navigate(['404']).then(() => {alert("Failed to fetch data from back! Please report to us!")});
     }
-  }
-
-  public getLaptops(): Laptop[] {
-    return this.laptops;
+    return null;
   }
 }

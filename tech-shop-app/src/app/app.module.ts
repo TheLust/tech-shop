@@ -40,10 +40,8 @@ import {MatTableModule} from "@angular/material/table";
 import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {ProductService} from "./service/product/product.service";
 import {MatPaginatorModule} from "@angular/material/paginator";
-
-export function initializeApp(productService: ProductService) {
-    return () => productService.initialize();
-}
+import { CrudComponent } from './component/crud/crud.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -59,7 +57,8 @@ export function initializeApp(productService: ProductService) {
     ConfirmPasswordDialogComponent,
     AboutComponent,
     LaptopListComponent,
-    LaptopCrudComponent
+    LaptopCrudComponent,
+    CrudComponent
   ],
     imports: [
         BrowserModule,
@@ -89,17 +88,11 @@ export function initializeApp(productService: ProductService) {
         MatSliderModule,
         MatListModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatTabsModule
     ],
   providers: [
-    CookieService,
-    ProductService,
-    {
-        provide: APP_INITIALIZER,
-        useFactory: initializeApp,
-        deps: [ProductService],
-        multi: true
-    }
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

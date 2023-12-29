@@ -1,4 +1,5 @@
 import {FormGroup, ValidationErrors} from "@angular/forms";
+import {formatCamelCaseToWords} from "./string-utils";
 
 export class ErrorUtils {
 
@@ -18,17 +19,6 @@ export class ErrorUtils {
     ['failed', 'has failed']
   ]);
 
-  private static formatCamelCaseToWords(input: string): string {
-    return input.split(/(?=[A-Z])/)
-      .map((word, index) => {
-        if (index === 0) {
-          return word.charAt(0).toUpperCase() + word.slice(1);
-        } else {
-          return word.toLowerCase();
-        }
-      }).join(' ');
-  }
-
   private static interpolateErrorMessage(message: string, error : any): string {
     const placeholderRegex = /\{(.*?)\}/g;
     return message.replace(placeholderRegex, (match, placeholder) => {
@@ -40,7 +30,7 @@ export class ErrorUtils {
 
   private static getErrorMessage(field :string, errors: ValidationErrors): string {
     const message:string = this.errorsMap.get(Object.keys(errors)[0]) != null ? this.interpolateErrorMessage(this.errorsMap.get(Object.keys(errors)[0]), Object.values(errors)[0]) : ("please insert error message: " + Object.keys(errors)[0]);
-    return this.formatCamelCaseToWords(field) + ' ' + message;
+    return formatCamelCaseToWords(field) + ' ' + message;
   }
 
   public static setErrors(formGroup: FormGroup, errors: Map<string, Map<string, string>>): void {

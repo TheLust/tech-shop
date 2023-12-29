@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  crud: string = 'laptops';
+  crud: string = 'Laptops';
+  categories: string[] = ['Laptops', 'PCs']
 }

@@ -2,11 +2,9 @@
   <div class="menu-container">
     <mat-form-field appearance="outline" class="white-field">
       <mat-select panelClass="panel-transparent-background" [(value)]="crud">
-        <mat-option value="laptops">Laptop Crud</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="crud-container">
-    <app-laptop-crud *ngIf="crud === 'laptops'"></app-laptop-crud>
-  </div>
+  <app-crud [productType]="crud"></app-crud>
 </div>

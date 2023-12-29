@@ -22,5 +22,5 @@ export class LaptopCrudComponent {
   columnsToDisplay: string[] = ['name', 'category', 'price', 'discount'];
   columnsToDisplayWithExpand: string[] = [...this.columnsToDisplay, 'expand'];
   expandedElement: ProductCardResponse | null;
-  dataSource: Laptop[] = this.productService.getLaptops();
+  dataSource: Laptop[] = null;
 }

@@ -53,6 +53,10 @@ public class Product {
     )
     private Double discount;
 
+    @Column(nullable = false)
+    @NotNull(message = ConstraintViolationMessage.NOT_NULL)
+    private Integer available;
+
     /**
      * Must contain producer, series, model
      * */

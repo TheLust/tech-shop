@@ -23,15 +23,4 @@ public class ProductController {
                 HttpStatus.OK
         );
     }
-
-//    @PostMapping(value = "")
-//    public ResponseEntity<LaptopResponse> save(@RequestParam("categoryId") Long categoryId,
-//                                               @RequestPart("images") MultipartFile[] images,
-//                                               @RequestPart @Valid ProductRequest productRequest,
-//                                               BindingResult bindingResult) {
-//        return new ResponseEntity<>(
-//                productFacade.save(categoryId, images, productRequest, bindingResult),
-//                HttpStatus.OK
-//        );
-//    }
 }

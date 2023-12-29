@@ -1,20 +1,17 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
 import {AuthService} from "../service/auth/auth.service";
-import {MatDialog} from "@angular/material/dialog";
-import {LoginDialogComponent} from "../component/login-dialog/login-dialog.component";
 
 export const AuthGuard: CanActivateFn = (route) => {
   const authService: AuthService = inject(AuthService);
   const router: Router = inject(Router);
-  const dialog: MatDialog = inject(MatDialog);
   const token: string = authService.getToken();
 
   if (!authService.isNotExpired(token)) {
     router.navigate(
         [sessionStorage.getItem('back_page') != null ? sessionStorage.getItem('back_page') : '/' ]
     ).then(() => {
-      dialog.open(LoginDialogComponent, { panelClass: 'dialog-transparent-background' });
+      authService.openLoginDialog()
       sessionStorage.setItem('next_page', '/' + route.url.toString());
     })
     return false;
