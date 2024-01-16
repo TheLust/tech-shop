@@ -1,0 +1,54 @@
+@media screen and (max-width: 960px) {
+  .mat-mdc-table {
+    vertical-align: middle;
+
+    caption {
+      font-size: 1em;
+    }
+
+    .mat-mdc-header-cell {
+      border: 10px solid;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .mat-mdc-header-row {
+      display: none;
+    }
+
+    .mat-mdc-cell {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: 1em;
+      text-align: right;
+      height:30px;
+      margin-bottom: 4%;
+    }
+
+    .mat-mdc-cell:before {
+      content: attr(data-label);
+      float: left;
+      text-transform: uppercase;
+      font-weight: var(--mat-table-header-headline-weight, 500);
+    }
+
+    .mat-mdc-cell:last-child {
+      border-bottom: 2px solid white;
+    }
+
+    .mat-mdc-row {
+      &:first-child .mat-mdc-cell:first-child {
+        margin-top: 4%;
+      }
+
+      &:last-child .mat-mdc-cell:last-child {
+        border: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

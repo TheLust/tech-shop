@@ -1,0 +1,30 @@
+#container {
+  display: flex;
+  flex-direction: column;
+
+  img {
+    border-radius: 100%;
+    margin: auto;
+  }
+
+  form {
+    display: flex;
+    margin-top: 10px;
+    flex-direction: column;
+    max-height: 320px;
+    overflow: auto;
+  }
+
+  button {
+    margin: 10px auto;
+  }
+
+  p {
+    margin: 5px auto;
+
+    &:hover {
+      color: var(--hover-color);
+      cursor: pointer;
+    }
+  }
+}

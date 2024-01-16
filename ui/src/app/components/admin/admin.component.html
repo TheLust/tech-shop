@@ -1,0 +1,15 @@
+<div class="w-100-container">
+  <div id="menu">
+    <mat-form-field appearance="outline">
+      <mat-select [ngModel]="selected" (ngModelChange)="onChange()" [(value)]="selected">
+        <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button
+            *ngIf="categories"
+            (click)="newProduct()">
+      Add
+    </button>
+  </div><br>
+  <app-crud *ngIf="categories && products" [categories]="categories" [products]="products" (changes)="onChange()"></app-crud>
+</div>

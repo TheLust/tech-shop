@@ -1,0 +1,68 @@
+<div id="title"
+     (click)="router.navigate([''])">
+  {{ TITLE.toUpperCase() }}
+</div>
+<div id="nav">
+<!--  <div class="route">HOME</div>-->
+<!--  <div class="route">ABOUT</div>-->
+<!--  <div class="route">PRODUCTS</div>-->
+<!--  <div class="route"-->
+<!--       [matMenuTriggerFor]="accountMenu"-->
+<!--       *ngIf="authService.isAuthenticated()">-->
+<!--    Hi, {{ authService.getUsername()?.toUpperCase() }}-->
+<!--  </div>-->
+  <button mat-icon-button
+          [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+          (click)="router.navigate([''])">
+    Home
+  </button>
+
+  <button mat-menu-item
+          (click)="router.navigate(['about'])">
+    About
+  </button>
+
+  <button mat-menu-item
+          (click)="router.navigate(['products'])">
+    Products
+  </button>
+
+  <button mat-menu-item
+          [matMenuTriggerFor]="accountMenu"
+          *ngIf="authService.isAuthenticated()">
+    Hi, {{ authService.getUsername() }}
+  </button>
+
+  <button mat-menu-item
+          (click)="authService.signIn()"
+          *ngIf="!authService.isAuthenticated()">
+    Sign in
+  </button>
+
+  <button mat-menu-item
+          (click)="authService.signUp()"
+          *ngIf="!authService.isAuthenticated()">
+    Sign up
+  </button>
+</mat-menu>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-menu-item>
+    Profile
+  </button>
+
+  <button mat-menu-item>
+    Orders
+  </button>
+
+  <button mat-menu-item
+          (click)="authService.signOut()">
+    Sign out
+  </button>
+</mat-menu>

@@ -1,0 +1,164 @@
+<div id="close-header-container">
+  <button mat-icon-button
+          (click)="cancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content
+     id="container">
+  <form [formGroup]="formGroup"
+        fxLayout="row wrap"
+        fxLayout.lt-sm="column"
+        fxLayoutAlign="space-around">
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%"
+                    *ngIf="data.product.id">
+      <mat-label>Id</mat-label>
+      <input matInput type="number" formControlName="id">
+<!--      <mat-error>{{ ErrorUtils.getError("id", formGroup.get("id").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+<!--      <mat-error>{{ ErrorUtils.getError("name", formGroup.get("name").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="parent" panelClass="transparent-blur">
+        <mat-option *ngFor="let category of data?.categories" [value]="category.id"> {{ category.name }} </mat-option>
+      </mat-select>
+<!--      <mat-error>{{ ErrorUtils.getError("parent", formGroup.get("parent").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%"
+                    *ngIf="formGroup.get('parent')?.value !== null">
+      <mat-label>Sub Category</mat-label>
+      <mat-select formControlName="category" panelClass="transparent-blur">
+        <mat-option *ngFor="let category of getSubCategories(formGroup.get('parent')?.value)" [value]="category.id"> {{ category.name }} </mat-option>
+      </mat-select>
+<!--      <mat-error>{{ ErrorUtils.getError("category", formGroup.get("category").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" formControlName="price">
+<!--      <mat-error>{{ ErrorUtils.getError("price", formGroup.get("price").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Discount</mat-label>
+      <input matInput type="number" formControlName="discount">
+<!--      <mat-error>{{ ErrorUtils.getError("discount", formGroup.get("discount").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Discount Type</mat-label>
+      <mat-select formControlName="discountType">
+        <mat-option value="AMOUNT">Amount</mat-option>
+        <mat-option value="PERCENT">Percent</mat-option>
+      </mat-select>
+<!--      <mat-error>{{ ErrorUtils.getError("discountType", formGroup.get("discountType").errors) }}</mat-error>-->
+    </mat-form-field>
+    <mat-form-field appearance="fill"
+                    class="white-field"
+                    fxFlex="0 1 calc(50% - 32px)"
+                    fxFlex.lt-sm="100%">
+      <mat-label>Available</mat-label>
+      <input matInput type="number" formControlName="available">
+<!--      <mat-error>{{ ErrorUtils.getError("available", formGroup.get("available").errors) }}</mat-error>-->
+    </mat-form-field>
+  </form>
+
+  <mat-accordion>
+    <ng-container *ngFor="let field of maps">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+<!--            {{formatCamelCaseToWords(field)}}-->
+            {{ field }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngFor="let element of getProperty(data?.product, field) | keyvalue">
+          <div class="map-element-container">
+            <div class="map-element">
+              <span class="map-element-key">{{element.key}}</span>
+              <span class="map-element-value">{{element.value}}</span>
+            </div>
+            <button mat-icon-button
+                    class="small-icon-button"
+                    (click)="editMapElement(field, element)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button
+                    class="small-icon-button"
+                    (click)="deleteMapElement(field, element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+        <div class="button-container">
+          <button mat-icon-button class="small-icon-button" (click)="addMapElement(field)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </ng-container>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Images
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <input
+        hidden
+        type="file"
+        multiple
+        #uploader
+        (change)="uploadFile($event)"/>
+      <div cdkDropList class="crud-image-list" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let image of data.product.images; index as i" class="crud-image-element" cdkDrag>
+          <img src="{{ 'data:image/png;base64,' + image }}" alt="{{i}}">
+          <img *cdkDragPreview src="{{ 'data:image/png;base64,' + image }}" alt="{{i}}">
+          <button mat-icon-button class="small-icon-button" (click)="deleteImage(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="button-container">
+        <button mat-icon-button class="small-icon-button" (click)="uploader.click()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <div class="button-container flex-space-between">
+    <button mat-button
+            (click)="cancel()">
+      Cancel
+    </button>
+    <button mat-button
+            (click)="save()">
+      Save
+    </button>
+  </div>
+</div>

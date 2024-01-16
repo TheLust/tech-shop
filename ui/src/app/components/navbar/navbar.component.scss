@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.1em;
+
+  #title {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      color: var(--hover-color);
+    }
+  }
+
+  #nav {
+    display: inline-flex;
+
+    .route {
+      margin-left: 10px;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--hover-color);
+      }
+    }
+  }
+}

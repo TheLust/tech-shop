@@ -1,0 +1,54 @@
+#close-header-container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.map-element-container {
+  display: flex;
+
+  .map-element {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  button {
+    flex: 1;
+  }
+}
+
+mat-expansion-panel {
+  .button-container {
+    justify-content: flex-end;
+  }
+
+  .crud-image-element {
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  width: 200px;
+}
